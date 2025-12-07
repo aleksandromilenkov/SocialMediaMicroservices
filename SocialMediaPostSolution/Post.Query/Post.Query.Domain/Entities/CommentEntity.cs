@@ -18,6 +18,6 @@ namespace Post.Query.Domain.Entities
         public required string Comment { get; set; }
         public bool Edited { get; set; }
         public Guid PostId { get; set; }
-        public required PostEntity Post { get; set; }
+        public PostEntity Post { get; set; }
     }
 }
