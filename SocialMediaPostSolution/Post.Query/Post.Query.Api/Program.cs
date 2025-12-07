@@ -18,6 +18,7 @@ builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IEventHandler, Post.Query.Infrastructure.Handlers.EventHandler>();
 builder.Services.Configure<ConsumerConfig>(builder.Configuration.GetSection("ConsumerConfig"));
 builder.Services.AddScoped<IEventConsumer, EventConsumer>();
+builder.Services.AddHostedService<ConsumerHostedService>();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
