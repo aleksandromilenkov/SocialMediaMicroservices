@@ -13,11 +13,11 @@ namespace Post.Query.Domain.Entities
     {
         [Key]
         public Guid CommentId { get; set; }
-        public string Username { get; set; }
+        public required string Username { get; set; }
         public DateTime CommentDate { get; set; }
-        public string Comment { get; set; }
+        public required string Comment { get; set; }
         public bool Edited { get; set; }
         public Guid PostId { get; set; }
-        public PostEntity Post { get; set; }
+        public required PostEntity Post { get; set; }
     }
 }
