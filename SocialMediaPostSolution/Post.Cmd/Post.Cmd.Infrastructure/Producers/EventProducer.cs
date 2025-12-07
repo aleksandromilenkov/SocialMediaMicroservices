@@ -29,6 +29,7 @@ namespace Post.Cmd.Infrastructure.Producers
             {
                 Key = Guid.NewGuid().ToString(),
                 Value = JsonSerializer.Serialize(@event, @event.GetType())
+                // @event.GetType() = "Use the actual runtime type of this object, not just the base class, so all fields are correctly included in the JSON."
             };
 
             var deliveryResult = await producer.ProduceAsync(topic, eventMessage);
