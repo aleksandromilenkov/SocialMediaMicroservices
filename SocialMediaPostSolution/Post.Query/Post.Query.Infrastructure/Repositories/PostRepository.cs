@@ -28,7 +28,7 @@ namespace Post.Query.Infrastructure.Repositories
         {
             await using var context = _factory.CreateDbContext();
             var postToRemove = await context.Posts.FindAsync(postId);
-            if (postToRemove == null) return;
+            if (postToRemove == null) throw new Exception("Post does not exists");
             context.Posts.Remove(postToRemove);
             await context.SaveChangesAsync();
         }
@@ -66,7 +66,7 @@ namespace Post.Query.Infrastructure.Repositories
         public async Task UpdateAsync(PostEntity post)
         {
             await using var context = _factory.CreateDbContext();
-            context.Update(post);
+            context.Posts.Update(post);
             await context.SaveChangesAsync();
         }
     }

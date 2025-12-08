@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Confluent.Kafka;
 using CQRS.Core.Consumers;
 using CQRS.Core.Events;
+using DnsClient.Internal;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Post.Query.Infrastructure.Converters;
 using Post.Query.Infrastructure.Handlers;
@@ -17,14 +19,17 @@ namespace Post.Query.Infrastructure.Consumers
     {
         private readonly ConsumerConfig _config;
         private readonly IEventHandler _eventHandler;
-        public EventConsumer(IOptions<ConsumerConfig> config, IEventHandler eventHandler)
+        private readonly ILogger<EventConsumer> _logger;
+        public EventConsumer(IOptions<ConsumerConfig> config, IEventHandler eventHandler, ILogger<EventConsumer> logger)
         {
             _config = config.Value;
             _eventHandler = eventHandler;
+            _logger = logger;
         }
         public void Consume(string topic)
         {
             using var consumer = new ConsumerBuilder<string, string>(_config).SetKeyDeserializer(Deserializers.Utf8).SetValueDeserializer(Deserializers.Utf8).Build();
+            _logger.LogInformation("Subscribing to Kafka topic: {Topic}", topic);
             consumer.Subscribe(topic);
             while (true)
             {
