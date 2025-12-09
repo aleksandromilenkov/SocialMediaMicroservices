@@ -22,7 +22,7 @@ namespace Post.Cmd.Api.Controllers
 
 
         [HttpPost("{id}")]
-        public async Task<ActionResult> NewCommentAsync(Guid id, AddCommentCommand command)
+        public async Task<ActionResult> NewCommentAsync(Guid id, [FromBody] AddCommentCommand command)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace Post.Cmd.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateCommentAsync(Guid id, EditCommentCommand command)
+        public async Task<ActionResult> UpdateCommentAsync(Guid id, [FromBody] EditCommentCommand command)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace Post.Cmd.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteCommentAsync(Guid id, RemoveCommentCommand command)
+        public async Task<ActionResult> DeleteCommentAsync(Guid id, [FromBody] RemoveCommentCommand command)
         {
             try
             {

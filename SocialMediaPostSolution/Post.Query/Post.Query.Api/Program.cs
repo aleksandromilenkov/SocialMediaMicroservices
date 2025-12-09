@@ -13,7 +13,7 @@ using Post.Query.Infrastructure.Handlers;
 using Post.Query.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddControllers();
 builder.Services.AddDbContextFactory<DatabaseContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
@@ -52,5 +52,6 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 app.UseHttpsRedirection();
+app.MapControllers();
 
 app.Run();

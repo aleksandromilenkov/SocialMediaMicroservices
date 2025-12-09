@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Post.Query.Domain.Entities
@@ -18,6 +19,7 @@ namespace Post.Query.Domain.Entities
         public required string Comment { get; set; }
         public bool Edited { get; set; }
         public Guid PostId { get; set; }
+        [JsonIgnore]
         public PostEntity Post { get; set; }
     }
 }

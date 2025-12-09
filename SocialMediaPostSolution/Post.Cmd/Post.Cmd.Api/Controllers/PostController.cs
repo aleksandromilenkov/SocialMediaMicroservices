@@ -20,7 +20,7 @@ namespace Post.Cmd.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> NewPostAsync(NewPostCommand command)
+        public async Task<ActionResult> NewPostAsync([FromBody] NewPostCommand command)
         {
             var id = Guid.NewGuid();
             try
@@ -74,7 +74,7 @@ namespace Post.Cmd.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdatePostAsync(Guid id, EditMessageCommand command)
+        public async Task<ActionResult> UpdatePostAsync(Guid id, [FromBody] EditMessageCommand command)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace Post.Cmd.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeletePostAsync(Guid id, DeletePostCommand command)
+        public async Task<ActionResult> DeletePostAsync(Guid id, [FromBody] DeletePostCommand command)
         {
             try
             {
