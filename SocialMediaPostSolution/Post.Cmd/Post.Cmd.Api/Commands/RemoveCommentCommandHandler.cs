@@ -4,9 +4,9 @@ using Post.Cmd.Domain.Aggregates;
 
 namespace Post.Cmd.Api.Commands
 {
-    public class RemoveCommendCommandHandler(IEventSourcingHandler<PostAggregate> eventSourcingHandler) : ICommandHandler<EditCommentCommand>
+    public class RemoveCommentCommandHandler(IEventSourcingHandler<PostAggregate> eventSourcingHandler) : ICommandHandler<RemoveCommentCommand>
     {
-        public async Task HandleAsync(EditCommentCommand command)
+        public async Task HandleAsync(RemoveCommentCommand command)
         {
             var postCommentToRemove = await eventSourcingHandler.GetByIdAsync(command.Id);
             postCommentToRemove.RemoveComment(command.CommentId, command.Username);

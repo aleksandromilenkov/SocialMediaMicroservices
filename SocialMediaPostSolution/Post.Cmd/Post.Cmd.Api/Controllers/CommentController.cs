@@ -1,4 +1,5 @@
-﻿using CQRS.Core.Infrastructure;
+﻿using CQRS.Core.Exceptions;
+using CQRS.Core.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Post.Cmd.Api.Commands;
@@ -7,7 +8,7 @@ using Post.Common.DTOs;
 
 namespace Post.Cmd.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
     {
@@ -20,15 +21,14 @@ namespace Post.Cmd.Api.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<ActionResult> NewCommentAsync(AddCommentCommand command)
+        [HttpPost("{id}")]
+        public async Task<ActionResult> NewCommentAsync(Guid id, AddCommentCommand command)
         {
-            var id = Guid.NewGuid();
             try
             {
                 command.Id = id;
                 await _commandDispatcher.DispatchAsync(command);
-                return StatusCode(StatusCodes.Status201Created, new NewPostResponse { Message = "New comment creation request completed successfully." });
+                return StatusCode(StatusCodes.Status201Created, new BaseResponse { Message = "New comment creation request completed successfully." });
             }
             catch (InvalidOperationException ex)
             {
@@ -43,13 +43,19 @@ namespace Post.Cmd.Api.Controllers
             }
         }
 
-        [HttpPut]
-        public async Task<ActionResult> UpdateCommentAsync(EditCommentCommand command)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateCommentAsync(Guid id, EditCommentCommand command)
         {
             try
             {
+                command.Id = id;
                 await _commandDispatcher.DispatchAsync(command);
                 return StatusCode(StatusCodes.Status204NoContent, new BaseResponse { Message = "Comment updated" });
+            }
+            catch (AggregateNotFoundException ex)
+            {
+                _logger.Log(LogLevel.Warning, ex, "Could not retreive aggregate, client passed an incorrect Post ID targetting the aggregate!");
+                return BadRequest(new BaseResponse { Message = ex.Message });
             }
             catch (Exception ex)
             {
@@ -59,11 +65,12 @@ namespace Post.Cmd.Api.Controllers
             }
         }
 
-        [HttpDelete]
-        public async Task<ActionResult> DeleteCommentAsync(RemoveCommentCommand command)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCommentAsync(Guid id, RemoveCommentCommand command)
         {
             try
             {
+                command.Id = id;
                 await _commandDispatcher.DispatchAsync(command);
                 return StatusCode(StatusCodes.Status204NoContent, new BaseResponse { Message = "Comment deleted" });
             }

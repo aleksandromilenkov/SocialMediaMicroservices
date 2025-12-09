@@ -46,9 +46,11 @@ builder.Services.AddScoped<ICommandDispatcher, CommandDispatcher>();
 builder.Services.AddScoped<IEventSourcingHandler<PostAggregate>, EventSourcingHandler>();
 builder.Services.AddScoped<ICommandHandler<NewPostCommand>, NewPostCommandHandler>();
 builder.Services.AddScoped<ICommandHandler<AddCommentCommand>, AddCommentCommandHandler>();
+builder.Services.AddScoped<ICommandHandler<EditCommentCommand>, EditCommentCommandHandler>();
 builder.Services.AddScoped<ICommandHandler<EditMessageCommand>, EditMessageCommandHandler>();
 builder.Services.AddScoped<ICommandHandler<LikePostCommand>, LikePostCommandHandler>();
 builder.Services.AddScoped<ICommandHandler<DeletePostCommand>, DeletePostCommandHandler>();
+builder.Services.AddScoped<ICommandHandler<RemoveCommentCommand>, RemoveCommentCommandHandler>();
 
 var app = builder.Build();
 

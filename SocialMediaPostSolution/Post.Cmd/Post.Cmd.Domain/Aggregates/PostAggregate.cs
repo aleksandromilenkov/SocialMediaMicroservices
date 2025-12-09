@@ -14,6 +14,7 @@ namespace Post.Cmd.Domain.Aggregates
     {
         private bool _active;
         private string _author;
+        private string _message;
         private readonly Dictionary<Guid, Tuple<string, string>> _comments = new();
 
         public bool Active { get { return _active; } set { _active = value; } }
@@ -38,6 +39,7 @@ namespace Post.Cmd.Domain.Aggregates
         {
             _id = @event.Id;
             _author = @event.Author;
+            _message = @event.Message;
             _active = true;
         }
 
@@ -59,6 +61,7 @@ namespace Post.Cmd.Domain.Aggregates
 
         public void Apply(MessageUpdatedEvent @event) {
             _id = @event.Id;
+            _message = @event.Message;
         }
 
         public void LikePost()

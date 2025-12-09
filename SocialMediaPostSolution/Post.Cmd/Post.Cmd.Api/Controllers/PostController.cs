@@ -46,17 +46,23 @@ namespace Post.Cmd.Api.Controllers
             }
         }
 
-        [HttpPost("{id}/like")]
-        public async Task<ActionResult> LikePostAsync(LikePostCommand command)
+        [HttpPut("like/{id}")]
+        public async Task<ActionResult> LikePostAsync(Guid id)
         {
             try
             {
-                await _commandDispatcher.DispatchAsync(command);
+                var likeCommand = new LikePostCommand { Id = id };
+                await _commandDispatcher.DispatchAsync(likeCommand);
                 return StatusCode(StatusCodes.Status204NoContent, new BaseResponse { Message = "Post liked." });
             }
             catch (InvalidOperationException ex)
             {
                 _logger.Log(LogLevel.Warning, ex, "Client made a bad request");
+                return BadRequest(new BaseResponse { Message = ex.Message });
+            }
+            catch (AggregateNotFoundException ex)
+            {
+                _logger.Log(LogLevel.Warning, ex, "Could not retreive aggregate, client passed an incorrect Post ID targetting the aggregate!");
                 return BadRequest(new BaseResponse { Message = ex.Message });
             }
             catch (Exception ex)
@@ -76,6 +82,16 @@ namespace Post.Cmd.Api.Controllers
                 await _commandDispatcher.DispatchAsync(command);
                 return StatusCode(StatusCodes.Status204NoContent, new BaseResponse { Message = "Post updated" });
             }
+            catch (InvalidOperationException ex)
+            {
+                _logger.Log(LogLevel.Warning, ex, "Client made a bad request");
+                return BadRequest(new BaseResponse { Message = ex.Message });
+            }
+            catch (AggregateNotFoundException ex)
+            {
+                _logger.Log(LogLevel.Warning, ex, "Could not retreive aggregate, client passed an incorrect Post ID targetting the aggregate!");
+                return BadRequest(new BaseResponse { Message = ex.Message });
+            }
             catch (Exception ex)
             {
                 const string SAFE_ERROR_MESSAGE = "Error while processing request to update a post!";
@@ -92,6 +108,16 @@ namespace Post.Cmd.Api.Controllers
                 command.Id=id;
                 await _commandDispatcher.DispatchAsync(command);
                 return StatusCode(StatusCodes.Status204NoContent, new BaseResponse { Message = "Post deleted" });
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.Log(LogLevel.Warning, ex, "Client made a bad request");
+                return BadRequest(new BaseResponse { Message = ex.Message });
+            }
+            catch (AggregateNotFoundException ex)
+            {
+                _logger.Log(LogLevel.Warning, ex, "Could not retreive aggregate, client passed an incorrect Post ID targetting the aggregate!");
+                return BadRequest(new BaseResponse { Message = ex.Message });
             }
             catch (Exception ex)
             {
