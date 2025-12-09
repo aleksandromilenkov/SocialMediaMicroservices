@@ -25,6 +25,11 @@ namespace CQRS.Core.Repositories
             await _eventStoreCollection.InsertOneAsync(@event).ConfigureAwait(false);
         }
 
+        public async Task<List<EventModel>> FindAllAsync()
+        {
+            return await _eventStoreCollection.Find(_ => true).ToListAsync().ConfigureAwait(false);
+        }
+
         public async Task<List<EventModel>> FindByAggregateId(Guid aggregateId)
         {
             return await _eventStoreCollection.Find(e => e.AggregateIdentifier == aggregateId)

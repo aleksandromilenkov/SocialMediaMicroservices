@@ -51,6 +51,7 @@ builder.Services.AddScoped<ICommandHandler<EditMessageCommand>, EditMessageComma
 builder.Services.AddScoped<ICommandHandler<LikePostCommand>, LikePostCommandHandler>();
 builder.Services.AddScoped<ICommandHandler<DeletePostCommand>, DeletePostCommandHandler>();
 builder.Services.AddScoped<ICommandHandler<RemoveCommentCommand>, RemoveCommentCommandHandler>();
+builder.Services.AddScoped<ICommandHandler<RestoreReadDbCommand>, RestoreReadDbCommandHandler>();
 
 var app = builder.Build();
 
