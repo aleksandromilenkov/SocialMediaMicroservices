@@ -1,6 +1,6 @@
-# SM-Post — CQRS, Event Sourcing & Kafka Microservices
+# Social-Media Microservices — CQRS, Event Sourcing & Kafka Microservices
 
-SM-Post is a distributed microservices system built with **.NET**, implementing **CQRS**, **Event Sourcing**, **Domain-Driven Design (DDD)**, and **Kafka** as an event streaming backbone.  
+This is a distributed microservices system built with **.NET**, implementing **CQRS**, **Event Sourcing**, **Domain-Driven Design (DDD)**, and **Kafka** as an event streaming backbone.  
 It consists of two autonomous microservices:
 
 - **Command Microservice** (Write side)
