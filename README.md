@@ -1,4 +1,4 @@
-# Social-Media Microservices — CQRS, Event Sourcing & Kafka Microservices
+g# Social-Media Microservices — CQRS, Event Sourcing & Kafka Microservices
 
 This is a distributed microservices system built with **.NET**, implementing **CQRS**, **Event Sourcing**, **Domain-Driven Design (DDD)**, and **Kafka** as an event streaming backbone.  
 It consists of two autonomous microservices:
@@ -182,14 +182,7 @@ Topic name is configured via: `KAFKA_TOPIC`
 
 - **MongoDB**  
 - **Kafka + Zookeeper**  
-- **SQL Server****
-
-Switch databases by setting the environment variable:
-
-```bash
-# Use SQL Server
-ASPNETCORE_ENVIRONMENT=Development
-```
+- **SQL Server**
 
 ## 📄 Summary
 
