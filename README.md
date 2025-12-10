@@ -85,7 +85,7 @@ await handler.HandleAsync(command);
 - Fully **DI-driven** command routing
 ## 🔍 Query Microservice (Read Model)
 
-The Query API maintains an optimized read model stored in **SQL Server** or **PostgreSQL**.
+The Query API maintains an optimized read model stored in **SQL Server**
 
 ### 📌 Flow
 
@@ -150,11 +150,10 @@ Query handling uses a dynamic **IQueryDispatcher**.
 
 ### 🔵 Read Database (Materialized Views)
 
-- **SQL Server** or **PostgreSQL**
+- **SQL Server**
 - Selected dynamically using environment:
 
-  - `Development` → SQL Server  
-  - `Development.PostgreSQL` → PostgreSQL  
+  - `Development` → SQL Server 
 
 - Stores normalized relational tables (**Posts** + **Comments**)
 ## 📡 Kafka (Event Streaming Backbone)
@@ -171,7 +170,7 @@ Topic name is configured via: `KAFKA_TOPIC`
 - **MongoDB**  
 - **Kafka / Confluent.Kafka**  
 - **Entity Framework Core**  
-- **SQL Server / PostgreSQL**  
+- **SQL Server **  
 - **Domain-Driven Design (DDD)**  
 - **CQRS + Event Sourcing**  
 - **Reflection-based dispatching**  
@@ -183,14 +182,11 @@ Topic name is configured via: `KAFKA_TOPIC`
 
 - **MongoDB**  
 - **Kafka + Zookeeper**  
-- **SQL Server** or **PostgreSQL**
+- **SQL Server****
 
 Switch databases by setting the environment variable:
 
 ```bash
-# Use PostgreSQL
-ASPNETCORE_ENVIRONMENT=Development.PostgreSQL
-
 # Use SQL Server
 ASPNETCORE_ENVIRONMENT=Development
 ```
