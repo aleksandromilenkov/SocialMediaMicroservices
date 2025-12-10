@@ -26,7 +26,7 @@ The system manages social media posts, comments, likes, and updates using an eve
 +-----------------------+        +--------------------------+  
                                          |  
                                          v  
-                               Read DB (SQL Server / PostgreSQL)  
+                               Read DB (SQL Server )  
   
 ---  
   
