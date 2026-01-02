@@ -40,9 +40,9 @@ The **Command API** is responsible for:
 - Persisting events into the **Event Store (MongoDB)**
 - Publishing events to **Kafka**
 
-### ✨ Core Concepts
+### ✨Core Concepts
 
-#### 🟣 **Aggregate Root**
+#### 🟣**Aggregate Root**
 
 All domain invariants and state transitions are protected by the `PostAggregate` class.  
 It applies events internally using **reflection-based Apply method discovery**:
